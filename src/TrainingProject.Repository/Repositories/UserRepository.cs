@@ -30,9 +30,7 @@ public class UserRepository : IUserRepository
     }
 
     public IQueryable<User> SelectAll()
-    {
-        return users;
-    }
+        => users;
 
     public async Task<User> SelectById(Guid id)
     {
