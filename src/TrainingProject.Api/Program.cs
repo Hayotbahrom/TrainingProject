@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using TrainingProject.Infrastructure.DbContexts;
+
 namespace TrainingProject.Api
 {
     public class Program
@@ -13,6 +16,11 @@ namespace TrainingProject.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            //Register DbContext
+            builder.Services.AddDbContext<AppDbContext>(option
+                => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                );
 
             var app = builder.Build();
 
