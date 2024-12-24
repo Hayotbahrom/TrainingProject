@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TrainingProject.UseCase.DTOs.Companies;
 using TrainingProject.UseCase.DTOs.Users;
 
-namespace TrainingProject.Domain.Interfaces.Services
+namespace TrainingProject.UseCase.Contracts
 {
     public interface ICompanyService
     {

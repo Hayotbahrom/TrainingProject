@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrainingProject.UseCase.DTOs.Users;
 
-namespace TrainingProject.Domain.Interfaces.Services
+namespace TrainingProject.UseCase.Contracts
 {
     public interface IUserService
     {
@@ -16,4 +16,3 @@ namespace TrainingProject.Domain.Interfaces.Services
         Task<UserForResultDto> ModifyAsync(UserForUpdateDto dto);
     }
 }
-    

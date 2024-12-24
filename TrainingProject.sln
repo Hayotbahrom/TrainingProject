@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingProject.Domain", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingProject.UseCase", "src\TrainingProject.UseCase\TrainingProject.UseCase.csproj", "{2E459556-58BC-4256-92C5-73DA87AC16CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingProject.Repository", "src\TrainingProject.Repository\TrainingProject.Repository.csproj", "{6C831ABC-4B71-4E6D-A560-5222B3F63733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingProject.Repositories", "src\TrainingProject.Repository\TrainingProject.Repositories.csproj", "{6C831ABC-4B71-4E6D-A560-5222B3F63733}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

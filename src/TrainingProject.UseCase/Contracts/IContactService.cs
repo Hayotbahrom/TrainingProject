@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TrainingProject.UseCase.DTOs.Contacts;
 using TrainingProject.UseCase.DTOs.Users;
 
-namespace TrainingProject.Domain.Interfaces.Services
+namespace TrainingProject.UseCase.Contracts
 {
     public interface IContactService
     {
