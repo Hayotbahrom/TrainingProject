@@ -13,6 +13,6 @@ namespace TrainingProject.UseCase.Contracts
         Task<UserForResultDto> GetByIdAsync(Guid id);
         Task<IEnumerable<UserForResultDto>> GetAllAsync();
         Task<UserForResultDto> AddAsync(UserForCreationDto dto);
-        Task<UserForResultDto> ModifyAsync(UserForUpdateDto dto);
+        Task<UserForResultDto> ModifyAsync( Guid id, UserForUpdateDto dto);
     }
 }
