@@ -14,6 +14,6 @@ namespace TrainingProject.UseCase.Contracts
         Task<CompanyForResultDto> GetByIdAsync(Guid id);
         Task<IEnumerable<CompanyForResultDto>> GetAllAsync();
         Task<CompanyForResultDto> AddAsync(CompanyForCreationDto dto);
-        Task<CompanyForResultDto> ModifyAsync(CompanyForUpdateDto dto);
+        Task<CompanyForResultDto> ModifyAsync( Guid id, CompanyForUpdateDto dto);
     }
 }

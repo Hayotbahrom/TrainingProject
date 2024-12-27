@@ -8,10 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TrainingProject.Domain\TrainingProject.Domain.csproj" />
+    <ProjectReference Include="..\TrainingProject.Repository\TrainingProject.Repositories.csproj" />
   </ItemGroup>
 
 </Project>
