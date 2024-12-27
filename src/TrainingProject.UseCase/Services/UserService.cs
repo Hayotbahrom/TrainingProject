@@ -7,9 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TrainingProject.Domain.Entities;
 using TrainingProject.Domain.Interfaces.Repositories;
+using TrainingProject.Repositories.Repositories;
 using TrainingProject.UseCase.Contracts;
+using TrainingProject.UseCase.DTOs.Companies;
 using TrainingProject.UseCase.DTOs.Users;
 using TrainingProject.UseCase.Exceptions;
+using TrainingProject.UseCase.Extentions;
 
 namespace TrainingProject.UseCase.Services
 {
@@ -32,32 +35,71 @@ namespace TrainingProject.UseCase.Services
             {
                 throw new ProjectException(403, "User is already exist");
             }
-            
             var mappedUser = mapper.Map<User>(dto);
 
+            var hashedPassword = PasswordHelper.Hash(dto.Password);
+            mappedUser.PasswordHash = hashedPassword.Hash;
+            mappedUser.Salt = hashedPassword.Salt;
+          
             var result = await userRepository.CreateAsync(mappedUser);
 
             return mapper.Map<UserForResultDto>(result);    
         }
 
-        public Task<IEnumerable<UserForResultDto>> GetAllAsync()
+        public async Task<IEnumerable<UserForResultDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var users = await userRepository.SelectAll()
+                .Where(x => x.IsDeleted == false)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return mapper.Map<IEnumerable<UserForResultDto>>(users);
         }
 
-        public Task<UserForResultDto> GetByIdAsync(Guid id)
+        public async Task<UserForResultDto> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var user = await userRepository.SelectAll()
+                .Where(x => x.IsDeleted == false)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
+            if (user is null)
+                throw new ProjectException(404, "User is not found");
+
+            return mapper.Map<UserForResultDto>(user);
         }
 
-        public Task<UserForResultDto> ModifyAsync(Guid id, UserForUpdateDto dto)
+        public async Task<UserForResultDto> ModifyAsync(Guid id, UserForUpdateDto dto)
         {
-            throw new NotImplementedException();
+            var existUser = await this.userRepository.SelectAll()
+                                                      .Where(x => x.Id == id && x.IsDeleted == false)
+                                                      .FirstOrDefaultAsync();
+            if (existUser is null)
+                throw new ProjectException(404, "user is not found");
+
+            var mappedUser = mapper.Map(dto, existUser);
+            mappedUser.ChangedAt = DateTime.UtcNow;
+            //mappedCompany.ChangedBy = User.
+
+            var result = await userRepository.UpdateAsync(mappedUser);
+            return mapper.Map<UserForResultDto>(result);
         }
 
-        public Task<bool> RemoveAsync(Guid id)
+        public async Task<bool> RemoveAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existUser = await this.userRepository.SelectAll()
+                                                      .Where(x => x.Id == id && x.IsDeleted == false)
+                                                      .FirstOrDefaultAsync();
+            if (existUser is null)
+                throw new ProjectException(404, "user is not found");
+
+            existUser.DeletedAt = DateTime.UtcNow;
+            existUser.IsDeleted = true;
+            //existUser.DeletedBy = 
+
+            await userRepository.UpdateAsync(existUser);
+
+            return await userRepository.DeleteAsync(id);
         }
     }
 }
