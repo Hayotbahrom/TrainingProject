@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrainingProject.Repository\TrainingProject.Repositories.csproj" />
+    <ProjectReference Include="..\TrainingProject.UseCase\TrainingProject.UseCase.csproj" />
   </ItemGroup>
 
 </Project>
