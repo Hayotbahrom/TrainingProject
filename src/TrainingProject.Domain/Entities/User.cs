@@ -13,12 +13,12 @@ namespace TrainingProject.Domain.Entities
         public string PasswordHash { get; set; }
         public string Salt {  get; set; }
         public bool IsActive { get; set; }
-        public DateTime ChangedAt { get; set; }
-        public string ChangedBy { get; set; }
-        public DateTime InsertedAt  { get; set; }
-        public string InsertedBy { get; set; }
-        public DateTime DeletedAt { get; set; }
-        public string DeletedBy { get; set; }
-        public bool IsDeleted { get; set; }
+        public DateTime? ChangedAt { get; set; }
+        public string? ChangedBy { get; set; }
+        public DateTime? InsertedAt  { get; set; } = DateTime.UtcNow;
+        public string? InsertedBy { get; set; }
+        public DateTime? DeletedAt { get; set; }
+        public string? DeletedBy { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }
