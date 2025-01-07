@@ -36,6 +36,7 @@ namespace TrainingProject.Api
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<ICompanyService, CompanyService>();
             builder.Services.AddScoped<IContactService, ContactService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
             //register automapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));
