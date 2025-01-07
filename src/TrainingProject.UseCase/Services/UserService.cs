@@ -49,7 +49,6 @@ namespace TrainingProject.UseCase.Services
         public async Task<IEnumerable<UserForResultDto>> GetAllAsync()
         {
             var users = await userRepository.SelectAll()
-                .Where(x => x.IsDeleted == false)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -59,7 +58,7 @@ namespace TrainingProject.UseCase.Services
         public async Task<UserForResultDto> GetByIdAsync(Guid id)
         {
             var user = await userRepository.SelectAll()
-                .Where(x => x.IsDeleted == false)
+                .Where(x => x.Id == id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
@@ -72,7 +71,7 @@ namespace TrainingProject.UseCase.Services
         public async Task<UserForResultDto> ModifyAsync(Guid id, UserForUpdateDto dto)
         {
             var existUser = await this.userRepository.SelectAll()
-                                                      .Where(x => x.Id == id && x.IsDeleted == false)
+                                                      .Where(x => x.Id == id)
                                                       .FirstOrDefaultAsync();
             if (existUser is null)
                 throw new ProjectException(404, "user is not found");
@@ -88,7 +87,7 @@ namespace TrainingProject.UseCase.Services
         public async Task<bool> RemoveAsync(Guid id)
         {
             var existUser = await this.userRepository.SelectAll()
-                                                      .Where(x => x.Id == id && x.IsDeleted == false)
+                                                      .Where(x => x.Id == id)
                                                       .FirstOrDefaultAsync();
             if (existUser is null)
                 throw new ProjectException(404, "user is not found");

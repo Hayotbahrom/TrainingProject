@@ -30,7 +30,7 @@ public class ContactRepository : IContactRepository
     }
 
     public IQueryable<Contact> SelectAll()
-        => contacts;
+        => contacts.Where(x => x.IsDeleted == false);
 
     public async Task<Contact> SelectById(Guid id)
     {

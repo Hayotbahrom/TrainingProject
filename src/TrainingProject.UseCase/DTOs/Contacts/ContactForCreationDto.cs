@@ -9,5 +9,4 @@ public class ContactForCreationDto
     public string PhoneNumber { get; set; }
     public string Email { get; set; }
     public string Notes { get; set; }
-    public string InsertedBy { get; set; }
 }

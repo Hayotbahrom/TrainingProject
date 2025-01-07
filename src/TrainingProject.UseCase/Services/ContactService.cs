@@ -25,7 +25,7 @@ public class ContactService : IContactService
     public async Task<ContactForResultDto> AddAsync(ContactForCreationDto dto)
     {
         var existCompany = await this.companyRepository.SelectAll()
-            .Where(x => x.Id == dto.CompanyId && x.IsDeleted == false)
+            .Where(x => x.Id == dto.CompanyId)
             .FirstOrDefaultAsync();
         if (existCompany is null)
             throw new ProjectException(404, "Company is not found");
@@ -49,7 +49,6 @@ public class ContactService : IContactService
     public async Task<IEnumerable<ContactForResultDto>> GetAllAsync()
     {
         var contacts = await contactRepository.SelectAll()
-            .Where(x => x.IsDeleted == false)
             .AsNoTracking()
             .ToListAsync();
 
@@ -59,7 +58,7 @@ public class ContactService : IContactService
     public async Task<ContactForResultDto> GetByIdAsync(Guid id)
     {
         var contact = await contactRepository.SelectAll()
-            .Where(x => x.Id == id && x.IsDeleted == false)
+            .Where(x => x.Id == id)
             .Include(x => x.Company)
             .FirstOrDefaultAsync();
         if (contact is  null)
@@ -71,14 +70,14 @@ public class ContactService : IContactService
     public async Task<ContactForResultDto> ModifyAsync(Guid id, ContactForUpdateDto dto)
     {
         var contact = await contactRepository.SelectAll()
-            .Where(x => x.Id == id && x.IsDeleted == false)
+            .Where(x => x.Id == id)
             .Include(x => x.Company)
             .FirstOrDefaultAsync();
         if (contact is null)
             throw new ProjectException(404, "Contact is not found");
 
         var existCompany = await this.companyRepository.SelectAll()
-            .Where(x => x.Id == dto.CompanyId && x.IsDeleted == false)
+            .Where(x => x.Id == dto.CompanyId)
             .FirstOrDefaultAsync();
         if (existCompany is null)
             throw new ProjectException(404, "Company is not found");
@@ -94,7 +93,7 @@ public class ContactService : IContactService
     public async Task<bool> RemoveAsync(Guid id)
     {
         var contact = await contactRepository.SelectAll()
-           .Where(x => x.Id == id && x.IsDeleted == false)
+           .Where(x => x.Id == id)
            .Include(x => x.Company)
            .FirstOrDefaultAsync();
         if (contact is null)
