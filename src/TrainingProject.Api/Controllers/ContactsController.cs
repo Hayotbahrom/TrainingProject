@@ -44,7 +44,7 @@ namespace TrainingProject.Api.Controllers
             });
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> ModifyAsync([FromRoute(Name = "id")] Guid id, [FromForm] ContactForUpdateDto dto)
+        public async Task<IActionResult> ModifyAsync([FromRoute(Name = "id")] Guid id, ContactForUpdateDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,
@@ -53,7 +53,7 @@ namespace TrainingProject.Api.Controllers
             });
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromForm] ContactForCreationDto dto)
+        public async Task<IActionResult> AddAsync( ContactForCreationDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,

@@ -23,7 +23,7 @@ public class ContactRepository : IContactRepository
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var user = await contacts.Where(x => x.IsDeleted == false && x.Id == id).FirstOrDefaultAsync();
+        var user = await contacts.Where(x => x.Id == id).FirstOrDefaultAsync();
         user.IsDeleted = true;
         await dbContext.SaveChangesAsync();
         return true;
