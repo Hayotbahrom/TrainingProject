@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TrainingProject.Domain.Entities
 {
@@ -20,7 +15,7 @@ namespace TrainingProject.Domain.Entities
         public string Email { get; set; }
         public string Notes { get; set; }
         public DateTime? ChangedAt { get; set; }
-        public string? ChangedBy {  get; set; }
+        public string? ChangedBy { get; set; }
         public DateTime? InsertedAt { get; set; } = DateTime.UtcNow;
         public string? InsertedBy { get; set; }
         public DateTime? DeletedAt { get; set; }
