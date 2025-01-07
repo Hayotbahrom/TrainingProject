@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using TrainingProject.Api.Extentions;
 using TrainingProject.Domain.Interfaces.Repositories;
 using TrainingProject.Infrastructure.DbContexts;
 using TrainingProject.Repositories.Repositories;
@@ -21,6 +22,9 @@ namespace TrainingProject.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSwaggerService();
+            builder.Services.AddJwtService(builder.Configuration);
 
             //Register DbContext
             builder.Services.AddDbContext<AppDbContext>(option
@@ -52,8 +56,8 @@ namespace TrainingProject.Api
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
