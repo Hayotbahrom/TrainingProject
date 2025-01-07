@@ -59,5 +59,13 @@ namespace TrainingProject.Api.Controllers
                 Message = "Success",
                 Data = await userService.AddAsync(dto)
             });
+        [HttpPut("change-password")]
+        public async Task<IActionResult> ChangePasswordAsync(Guid id, UserForChangePasswordDto dto)
+            => Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = await userService.ChangePasswordAsync(id, dto)
+            });
     }
 }

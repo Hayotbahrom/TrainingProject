@@ -100,7 +100,7 @@ namespace TrainingProject.UseCase.Services
 
             return await userRepository.DeleteAsync(id);
         }
-        public async Task<bool> ChangePasswordAsync(Guid id, UserForChangePasswordDto dto)
+        public async Task<UserForResultDto> ChangePasswordAsync(Guid id, UserForChangePasswordDto dto)
         {
             var user = await this.userRepository.SelectById(id);
             if (user is null || !PasswordHelper.Verify(dto.OldPassword, user.Salt, user.PasswordHash))
@@ -111,9 +111,9 @@ namespace TrainingProject.UseCase.Services
             var hash = PasswordHelper.Hash(dto.ConfirmedPassword);
             user.Salt = hash.Salt;
             user.PasswordHash = hash.Hash;
-            var updated = await this.userRepository.UpdateAsync(user);
+            var updatedUser = await this.userRepository.UpdateAsync(user);
 
-            return true;
+            return mapper.Map<UserForResultDto>(updatedUser);
         }
     }
 }

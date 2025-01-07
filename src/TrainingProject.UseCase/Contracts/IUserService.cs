@@ -14,5 +14,6 @@ namespace TrainingProject.UseCase.Contracts
         Task<IEnumerable<UserForResultDto>> GetAllAsync();
         Task<UserForResultDto> AddAsync(UserForCreationDto dto);
         Task<UserForResultDto> ModifyAsync( Guid id, UserForUpdateDto dto);
+        Task<UserForResultDto> ChangePasswordAsync(Guid id, UserForChangePasswordDto dto);
     }
 }
