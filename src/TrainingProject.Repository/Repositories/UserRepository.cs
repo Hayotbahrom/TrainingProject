@@ -30,7 +30,7 @@ public class UserRepository : IUserRepository
     }
 
     public IQueryable<User> SelectAll()
-        => users;
+        => users.Where(x => x.IsDeleted == false);
 
     public async Task<User> SelectById(Guid id)
     {

@@ -23,14 +23,14 @@ public class CompanyRepository : ICompanyRepository
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var company = await companies.Where(x => x.Id == id && x.IsDeleted == false).FirstOrDefaultAsync();
+        var company = await companies.FindAsync(id);
         company.IsDeleted = true;
         await dbContext.SaveChangesAsync();
         return true;
     }
 
     public IQueryable<Company> SelectAll()
-        => companies;
+        => companies.Where(x => x.IsDeleted == false);
 
     public async Task<Company> SelectById(Guid id)
     {

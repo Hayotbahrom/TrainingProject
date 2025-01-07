@@ -20,7 +20,7 @@ namespace TrainingProject.UseCase.Services
         public async Task<CompanyForResultDto> AddAsync(CompanyForCreationDto dto)
         {
             var existCompany = await this.companyRepository.SelectAll()
-                .Where(x => x.Name == dto.Name && x.PhoneNumber == dto.PhoneNumber && x.IsDeleted == false)
+                .Where(x => x.Name == dto.Name && x.PhoneNumber == dto.PhoneNumber)
                 .FirstOrDefaultAsync();
 
             if (existCompany is not null)
@@ -35,7 +35,6 @@ namespace TrainingProject.UseCase.Services
         public async Task<IEnumerable<CompanyForResultDto>> GetAllAsync()
         {
             var companies = await companyRepository.SelectAll()
-                .Where(x => x.IsDeleted == false)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -45,7 +44,7 @@ namespace TrainingProject.UseCase.Services
         public async Task<CompanyForResultDto> GetByIdAsync(Guid id)
         {
             var existCompany = await this.companyRepository.SelectAll()
-                                                      .Where(x => x.Id == id && x.IsDeleted == false)
+                                                      .Where(x => x.Id == id)
                                                       .FirstOrDefaultAsync();
             if (existCompany is null)
                 throw new ProjectException(404, "Company is not found");
@@ -56,7 +55,7 @@ namespace TrainingProject.UseCase.Services
         public async Task<CompanyForResultDto> ModifyAsync(Guid id,CompanyForUpdateDto dto)
         {
             var existCompany = await this.companyRepository.SelectAll()
-                                                      .Where(x => x.Id == id && x.IsDeleted == false)
+                                                      .Where(x => x.Id == id)
                                                       .FirstOrDefaultAsync();
             if (existCompany is null)
                 throw new ProjectException(404, "Company is not found");
@@ -72,7 +71,7 @@ namespace TrainingProject.UseCase.Services
         public async Task<bool> RemoveAsync(Guid id)
         {
             var existCompany = await this.companyRepository.SelectAll()
-                                                     .Where(x => x.Id == id && x.IsDeleted == false)
+                                                     .Where(x => x.Id == id)
                                                      .FirstOrDefaultAsync();
             if (existCompany is null)
                 throw new ProjectException(404, "Company is not found");
