@@ -17,6 +17,5 @@ namespace TrainingProject.UseCase.DTOs.Companies
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
-        public string InsertedBy { get; set; }
     }
 }

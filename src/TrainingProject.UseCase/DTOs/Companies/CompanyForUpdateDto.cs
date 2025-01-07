@@ -18,6 +18,5 @@ namespace TrainingProject.UseCase.DTOs.Companies
         public string Email { get; set; }
         public string Website { get; set; }
         public bool IsActive { get; set; }
-        public string ChangedBy { get; set; }
     }
 }
