@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrainingProject.Api.Models;
 using TrainingProject.UseCase.Contracts;
@@ -15,6 +16,7 @@ namespace TrainingProject.Api.Controllers
         {
             this.userService = userService;
         }
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
             => Ok( new Response
@@ -52,7 +54,7 @@ namespace TrainingProject.Api.Controllers
             });
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromForm] UserForCreationDto dto)
+        public async Task<IActionResult> AddAsync([FromBody] UserForCreationDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,
