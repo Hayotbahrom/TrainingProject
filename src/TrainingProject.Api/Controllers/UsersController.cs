@@ -54,7 +54,7 @@ namespace TrainingProject.Api.Controllers
             });
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromForm] UserForCreationDto dto)
+        public async Task<IActionResult> AddAsync([FromBody] UserForCreationDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,
