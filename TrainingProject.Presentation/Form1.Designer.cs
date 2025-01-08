@@ -1,14 +1,14 @@
 ﻿namespace TrainingProject.Presentation
 {
-    partial class Form1
+    partial class formLogin
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,122 +23,101 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            label1 = new Label();
-            button1 = new Button();
-            checkBox1 = new CheckBox();
-            checkedListBox1 = new CheckedListBox();
-            bindingSource1 = new BindingSource(components);
-            comboBox1 = new ComboBox();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            dataGridView1 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            Username = new Label();
+            Password = new Label();
+            txtUsername = new TextBox();
+            txtPassword = new TextBox();
+            btnLogin = new Button();
+            btnRegister = new Button();
             SuspendLayout();
             // 
-            // label1
+            // Username
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(204, 57);
-            label1.Name = "label1";
-            label1.Size = new Size(131, 20);
-            label1.TabIndex = 0;
-            label1.Text = "label bor bu yerda";
-            label1.Click += label1_Click;
+            Username.AutoSize = true;
+            Username.Font = new Font("Stencil", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Username.Location = new Point(89, 68);
+            Username.Name = "Username";
+            Username.Size = new Size(160, 33);
+            Username.TabIndex = 0;
+            Username.Text = "Username";
+            Username.Click += label1_Click;
             // 
-            // button1
+            // Password
             // 
-            button1.BackColor = SystemColors.MenuHighlight;
-            button1.BackgroundImage = Properties.Resources.madrasah2;
-            button1.Location = new Point(346, 241);
-            button1.Name = "button1";
-            button1.Size = new Size(321, 70);
-            button1.TabIndex = 1;
-            button1.Text = "sign in";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            Password.AutoSize = true;
+            Password.Font = new Font("Stencil", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Password.Location = new Point(88, 118);
+            Password.Name = "Password";
+            Password.Size = new Size(161, 33);
+            Password.TabIndex = 1;
+            Password.Text = "Password";
             // 
-            // checkBox1
+            // txtUsername
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(31, 57);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(101, 24);
-            checkBox1.TabIndex = 2;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            txtUsername.Location = new Point(273, 68);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(191, 27);
+            txtUsername.TabIndex = 2;
             // 
-            // checkedListBox1
+            // txtPassword
             // 
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(452, 57);
-            checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(150, 114);
-            checkedListBox1.TabIndex = 3;
-            checkedListBox1.SelectedIndexChanged += checkedListBox1_SelectedIndexChanged;
+            txtPassword.Location = new Point(273, 118);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(191, 27);
+            txtPassword.TabIndex = 3;
             // 
-            // comboBox1
+            // btnLogin
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(31, 104);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(171, 28);
-            comboBox1.TabIndex = 4;
+            btnLogin.BackColor = Color.MediumSpringGreen;
+            btnLogin.Location = new Point(304, 174);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(94, 29);
+            btnLogin.TabIndex = 4;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
-            // contextMenuStrip1
+            // btnRegister
             // 
-            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
+            btnRegister.BackColor = Color.PeachPuff;
+            btnRegister.Location = new Point(170, 174);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new Size(94, 29);
+            btnRegister.TabIndex = 5;
+            btnRegister.Text = "Register";
+            btnRegister.UseVisualStyleBackColor = false;
+            btnRegister.Click += btnRegister_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(40, 176);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(300, 188);
-            dataGridView1.TabIndex = 6;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // Form1
+            // formLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
-            BackgroundImageLayout = ImageLayout.Center;
-            CausesValidation = false;
-            ClientSize = new Size(780, 450);
-            Controls.Add(dataGridView1);
-            Controls.Add(comboBox1);
-            Controls.Add(checkedListBox1);
-            Controls.Add(checkBox1);
-            Controls.Add(button1);
-            Controls.Add(label1);
-            Name = "Form1";
-            Text = "Form1";
-            WindowState = FormWindowState.Minimized;
-            Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ClientSize = new Size(527, 279);
+            Controls.Add(btnRegister);
+            Controls.Add(btnLogin);
+            Controls.Add(txtPassword);
+            Controls.Add(txtUsername);
+            Controls.Add(Password);
+            Controls.Add(Username);
+            Name = "formLogin";
+            Text = "LoginPage";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private Button button1;
-        private CheckBox checkBox1;
-        private CheckedListBox checkedListBox1;
-        private BindingSource bindingSource1;
-        private ComboBox comboBox1;
-        private ContextMenuStrip contextMenuStrip1;
-        private DataGridView dataGridView1;
+        private Label Username;
+        private Label Password;
+        private TextBox txtUsername;
+        private TextBox txtPassword;
+        private Button btnLogin;
+        private Button btnRegister;
     }
 }
