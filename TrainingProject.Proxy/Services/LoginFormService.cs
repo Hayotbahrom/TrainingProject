@@ -1,42 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 using TrainingProject.Proxy.ViewModels;
+using TrainingProject.Shared.DTOs.Users;
 
-namespace TrainingProject.Proxy.Services
+namespace TrainingProject.Proxy.Services;
+
+public class LoginFormService
 {
-    public class LoginFormService
+    private string baseUrl = "https://localhost:7143/api/";
+    private HttpClient _httpClient;
+    public LoginFormService(HttpClient httpClient)
     {
-        private HttpClient _httpClient;
-        public LoginFormService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-        public async Task<TokenResponse> LoginAsync(LoginViewModel model)
-        {
-            string url = "https://localhost:7143/api/Auth/login";
-            var jsonContent = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.PatchAsync(url, jsonContent);
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<TokenResponse>(responseContent);
-            }
-            else
-                throw new Exception($"Login failed! Status code {response.StatusCode}");
-        }
-        public Task RegisterAsync()
-        {
-
-        }
+        _httpClient = httpClient;
     }
-    public class TokenResponse
+    public async Task<TokenResponse> LoginAsync(UserForCreationDto model)
     {
-        public string Token { get; set; }
-        public string RefreshToken { get; set; }
+        string url = baseUrl + "Auth/login";
+        var jsonContent = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync(url, jsonContent);
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<TokenResponse>(responseContent);
+        }
+        else
+            throw new Exception($"Login failed! Status code {response.StatusCode}");
     }
+    public async Task<bool> RegisterAsync(string username, string password)
+    {
+        var userCreation = new UserForCreationDto()
+        {
+            Username = username,
+            Password = password
+        };
+
+        string url = baseUrl + "Users";
+        var jsonContent = new StringContent(JsonSerializer.Serialize(userCreation), Encoding.UTF8, "application/json");
+        var response = await _httpClient.PostAsync(url, jsonContent);
+
+        if (response.IsSuccessStatusCode)
+            return true;
+        return false;
+    }
+}
+public class TokenResponse
+{
+    [JsonPropertyName("access_token")]
+    public string Token { get; set; }
 }

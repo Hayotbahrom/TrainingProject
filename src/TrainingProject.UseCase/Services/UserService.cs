@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace TrainingProject.UseCase.Services
             var hashedPassword = PasswordHelper.Hash(dto.Password);
             mappedUser.PasswordHash = hashedPassword.Hash;
             mappedUser.Salt = hashedPassword.Salt;
-          
+           // mappedUser.InsertedBy = H
             var result = await userRepository.CreateAsync(mappedUser);
 
             return mapper.Map<UserForResultDto>(result);    
