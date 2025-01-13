@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\TrainingProject.UseCase\TrainingProject.UseCase.csproj" />
+    <ProjectReference Include="..\TrainingProject.Proxy\TrainingProject.Proxy.csproj" />
   </ItemGroup>
 
   <ItemGroup>

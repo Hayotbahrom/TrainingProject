@@ -17,7 +17,7 @@ namespace TrainingProject.Api.Controllers
         }
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> login(LoginForCreationDto dto)
+        public async Task<IActionResult> login([FromBody] LoginForCreationDto dto)
             => Ok(new Response
             {
                 StatusCode = 200,
