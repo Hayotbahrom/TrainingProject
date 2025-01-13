@@ -48,7 +48,7 @@
             // 
             // btnContact
             // 
-            btnContact.BackColor = SystemColors.GradientActiveCaption;
+            btnContact.BackColor = SystemColors.ActiveCaption;
             btnContact.Location = new Point(161, 213);
             btnContact.Name = "btnContact";
             btnContact.Size = new Size(156, 66);
@@ -59,7 +59,7 @@
             // 
             // btnCompany
             // 
-            btnCompany.BackColor = SystemColors.GradientActiveCaption;
+            btnCompany.BackColor = SystemColors.ActiveCaption;
             btnCompany.Location = new Point(469, 213);
             btnCompany.Name = "btnCompany";
             btnCompany.Size = new Size(156, 66);
