@@ -30,6 +30,10 @@
         {
             tabControl1 = new TabControl();
             tabLogin = new TabPage();
+            tabRegister = new TabPage();
+            label1 = new Label();
+            textUsername = new TextBox();
+            button1 = new Button();
             textPassword = new TextBox();
             label2 = new Label();
             button1 = new Button();
@@ -43,6 +47,9 @@
             label3 = new Label();
             textRegUsername = new TextBox();
             label4 = new Label();
+            textConfirmPassword = new TextBox();
+            label5 = new Label();
+            btnRegister = new Button();
             tabControl1.SuspendLayout();
             tabLogin.SuspendLayout();
             tabRegister.SuspendLayout();
@@ -138,8 +145,33 @@
             tabRegister.TabIndex = 1;
             tabRegister.Text = "Register";
             // 
+            // label1
             // btnRegister
             // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Stencil", 12F);
+            label1.Location = new Point(98, 107);
+            label1.Name = "label1";
+            label1.Size = new Size(114, 24);
+            label1.TabIndex = 0;
+            label1.Text = "Username";
+            // 
+            // textUsername
+            // 
+            textUsername.Location = new Point(278, 104);
+            textUsername.Name = "textUsername";
+            textUsername.Size = new Size(284, 34);
+            textUsername.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(278, 236);
+            button1.Name = "button1";
+            button1.Size = new Size(136, 48);
+            button1.TabIndex = 2;
+            button1.Text = "Enter";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             btnRegister.BackColor = SystemColors.GradientActiveCaption;
             btnRegister.Location = new Point(259, 228);
             btnRegister.Name = "btnRegister";
@@ -149,15 +181,28 @@
             btnRegister.UseVisualStyleBackColor = false;
             btnRegister.Click += btnRegister_Click;
             // 
+            // textPassword
             // textConfirmPassword
             // 
+            textPassword.Location = new Point(278, 166);
+            textPassword.Name = "textPassword";
+            textPassword.Size = new Size(284, 34);
+            textPassword.TabIndex = 4;
             textConfirmPassword.Location = new Point(259, 165);
             textConfirmPassword.Name = "textConfirmPassword";
             textConfirmPassword.Size = new Size(284, 34);
             textConfirmPassword.TabIndex = 10;
             // 
+            // label2
             // label5
             // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Stencil", 12F);
+            label2.Location = new Point(103, 169);
+            label2.Name = "label2";
+            label2.Size = new Size(113, 24);
+            label2.TabIndex = 3;
+            label2.Text = "Password";
             label5.AutoSize = true;
             label5.Font = new Font("Stencil", 12F);
             label5.Location = new Point(29, 173);
@@ -200,10 +245,38 @@
             label4.TabIndex = 5;
             label4.Text = "Username";
             // 
+            // textConfirmPassword
+            // 
+            textConfirmPassword.Location = new Point(259, 165);
+            textConfirmPassword.Name = "textConfirmPassword";
+            textConfirmPassword.Size = new Size(284, 34);
+            textConfirmPassword.TabIndex = 10;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Stencil", 12F);
+            label5.Location = new Point(29, 173);
+            label5.Name = "label5";
+            label5.Size = new Size(205, 24);
+            label5.TabIndex = 9;
+            label5.Text = "Confirm Password";
+            // 
+            // btnRegister
+            // 
+            btnRegister.Location = new Point(259, 228);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new Size(153, 49);
+            btnRegister.TabIndex = 11;
+            btnRegister.Text = "Register";
+            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(800, 450);
             Controls.Add(tabControl1);

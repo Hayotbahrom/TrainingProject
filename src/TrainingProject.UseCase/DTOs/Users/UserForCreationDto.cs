@@ -10,6 +10,5 @@ namespace TrainingProject.UseCase.DTOs.Users
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public string InsertedBy { get; set; }
     }
 }

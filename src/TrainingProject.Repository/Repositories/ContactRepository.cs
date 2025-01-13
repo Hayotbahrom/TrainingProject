@@ -1,32 +1,47 @@
-﻿using TrainingProject.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using TrainingProject.Domain.Entities;
 using TrainingProject.Domain.Interfaces.Repositories;
+using TrainingProject.Infrastructure.DbContexts;
 
 namespace TrainingProject.Repositories.Repositories;
 
 public class ContactRepository : IContactRepository
 {
-    public Task<Contact> CreateAsync(Contact contact)
+    AppDbContext dbContext;
+    DbSet<Contact> contacts;
+    public ContactRepository(AppDbContext dbContext)
     {
-        throw new NotImplementedException();
+        this.dbContext = dbContext;
+        contacts = dbContext.Contacts;
+    }
+    public async Task<Contact> CreateAsync(Contact contact)
+    {
+        await dbContext.AddAsync(contact);
+        await dbContext.SaveChangesAsync();
+        return contact;
     }
 
-    public Task<bool> DeleteAsync(Guid id)
+    public async Task<bool> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var user = await contacts.Where(x => x.Id == id).FirstOrDefaultAsync();
+        user.IsDeleted = true;
+        await dbContext.SaveChangesAsync();
+        return true;
     }
 
     public IQueryable<Contact> SelectAll()
+        => contacts.Where(x => x.IsDeleted == false);
+
+    public async Task<Contact> SelectById(Guid id)
     {
-        throw new NotImplementedException();
+        var result = await contacts.Where(x => x.Id == id).FirstOrDefaultAsync();
+        return result;
     }
 
-    public Task<Contact> SelectById(Guid id)
+    public async Task<Contact> UpdateAsync(Contact contact)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<Contact> UpdateAsync(Contact contact)
-    {
-        throw new NotImplementedException();
+        var result = dbContext.Update(contact).Entity;
+        await dbContext.SaveChangesAsync();
+        return result;
     }
 }

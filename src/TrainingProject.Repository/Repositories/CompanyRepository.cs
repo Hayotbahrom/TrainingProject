@@ -1,32 +1,47 @@
-﻿using TrainingProject.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using TrainingProject.Domain.Entities;
 using TrainingProject.Domain.Interfaces.Repositories;
+using TrainingProject.Infrastructure.DbContexts;
 
 namespace TrainingProject.Repositories.Repositories;
 
 public class CompanyRepository : ICompanyRepository
 {
-    public Task<Company> CreateAsync(Company company)
+    AppDbContext dbContext;
+    DbSet<Company> companies;
+    public CompanyRepository(AppDbContext dbContext)
     {
-        throw new NotImplementedException();
+        this.dbContext = dbContext;
+        companies = dbContext.Companies;
+    }
+    public async Task<Company> CreateAsync(Company company)
+    {
+        await dbContext.AddAsync(company);
+        await dbContext.SaveChangesAsync();
+        return company;
     }
 
-    public Task<bool> DeleteAsync(Guid id)
+    public async Task<bool> DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var company = await companies.FindAsync(id);
+        company.IsDeleted = true;
+        await dbContext.SaveChangesAsync();
+        return true;
     }
 
     public IQueryable<Company> SelectAll()
+        => companies.Where(x => x.IsDeleted == false);
+
+    public async Task<Company> SelectById(Guid id)
     {
-        throw new NotImplementedException();
+        var company = await companies.Where(x => x.Id == id).FirstOrDefaultAsync();
+        return company;
     }
 
-    public Task<Company> SelectById(Guid id)
+    public async Task<Company> UpdateAsync(Company company)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<Company> UpdateAsync(Company company)
-    {
-        throw new NotImplementedException();
+        var result = dbContext.Update(company).Entity;
+        await dbContext.SaveChangesAsync(); 
+        return result;
     }
 }

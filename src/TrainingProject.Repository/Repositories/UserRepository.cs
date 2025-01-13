@@ -23,16 +23,14 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var result = await users.Where(x => x.IsDeleted == false && x.Id == id).FirstOrDefaultAsync();
+        var result = await users.Where(x => x.Id == id).FirstOrDefaultAsync();
         result.IsDeleted = true;
         await dbContext.SaveChangesAsync();
         return true;
     }
 
     public IQueryable<User> SelectAll()
-    {
-        return users;
-    }
+        => users.Where(x => x.IsDeleted == false);
 
     public async Task<User> SelectById(Guid id)
     {
