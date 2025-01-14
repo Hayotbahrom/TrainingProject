@@ -18,12 +18,7 @@ namespace TrainingProject.Api.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
-            => Ok(new Response
-            {
-                StatusCode = 200,
-                Message = "Success",
-                Data = await contactService.GetAllAsync()
-            });
+            => Ok(await contactService.GetAllAsync());
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] Guid id)
