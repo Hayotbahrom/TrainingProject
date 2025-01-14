@@ -26,12 +26,7 @@ namespace TrainingProject.Api.Controllers
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] Guid id)
-            => Ok(new Response
-            {
-                StatusCode = 200,
-                Message = "Success",
-                Data = await contactService.RemoveAsync(id)
-            });
+            => Ok( await contactService.RemoveAsync(id));
 
         [HttpPut("{id}")]
         public async Task<IActionResult> ModifyAsync([FromRoute(Name = "id")] Guid id, ContactForUpdateDto dto)

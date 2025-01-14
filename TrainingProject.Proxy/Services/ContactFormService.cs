@@ -65,6 +65,17 @@ public class ContactFormService
             throw new HttpRequestException($"Failed to fetch contact. Status code: {response.StatusCode}");
         }
     }
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        string url = $"{baseUrl}Contacts/{id}";
+        var response =  await httpClient.DeleteAsync(url);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return true;
+        }
+        return false;
+    }
     public async Task<bool> UpdateAsync(Guid id, ContactForUpdateDto model)
     {
         string url = $"{baseUrl}Contacts/{id}"; 

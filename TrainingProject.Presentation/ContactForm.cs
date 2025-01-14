@@ -91,9 +91,23 @@ namespace TrainingProject.Presentation
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                var result = await contactFormService.DeleteAsync(modelId);
+                if (result)
+                {
+                    MessageBox.Show("Successfully deleted..");
+                    Clear();
+                    PopulateDataGridView();
+                }
+                else MessageBox.Show("Failed, maybe you didnt select any contact");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"error: {ex.Message}");
+            }
         }
 
         private void Contact(object sender, EventArgs e)
