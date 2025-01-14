@@ -15,6 +15,7 @@ namespace TrainingProject.Presentation
     public partial class ContactForm : Form
     {
         private ContactFormService contactFormService;
+        Guid modelId;
         public ContactForm()
         {
             InitializeComponent();
@@ -37,27 +38,52 @@ namespace TrainingProject.Presentation
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            ContactForCreationDto contact = new ContactForCreationDto()
-            {
-                FirstName = textFirstname.Text,
-                LastName = textLastname.Text,
-                Email = textEmail.Text,
-                PhoneNumber = textPhoneNumber.Text,
-                Position = textPosition.Text,
-                CompanyId = Guid.Parse(textCompany.Text),
-                Notes = textNote.Text
-            };
             try
             {
-                bool result = await contactFormService.AddAsync(contact);
-                if (result)
+                if (btnSave.Text == "Update")
                 {
-                    MessageBox.Show("Contact successfuly inserted!");
-                    Clear();
-                    PopulateDataGridView();
+                    ContactForUpdateDto contact = new ContactForUpdateDto()
+                    {
+                        FirstName = textFirstname.Text,
+                        LastName = textLastname.Text,
+                        Email = textEmail.Text,
+                        PhoneNumber = textPhoneNumber.Text,
+                        Position = textPosition.Text,
+                        CompanyId = Guid.Parse(textCompany.Text),
+                        Notes = textNote.Text
+                    };
+                    bool result = await contactFormService.UpdateAsync(modelId, contact);
+                    if (result)
+                    {
+                        MessageBox.Show("Contact successfuly updated!");
+                        Clear();
+                        PopulateDataGridView();
+                    }
+                    else
+                        MessageBox.Show("update Failed");
                 }
-                else 
-                    MessageBox.Show("Failed, Contract is already exist.");
+                else
+                {
+                    ContactForCreationDto contact = new ContactForCreationDto()
+                    {
+                        FirstName = textFirstname.Text,
+                        LastName = textLastname.Text,
+                        Email = textEmail.Text,
+                        PhoneNumber = textPhoneNumber.Text,
+                        Position = textPosition.Text,
+                        CompanyId = Guid.Parse(textCompany.Text),
+                        Notes = textNote.Text
+                    };
+                    bool result = await contactFormService.AddAsync(contact);
+                    if (result)
+                    {
+                        MessageBox.Show("Contact successfuly inserted!");
+                        Clear();
+                        PopulateDataGridView();
+                    }
+                    else
+                        MessageBox.Show("Failed");
+                }
             }
             catch (Exception ex)
             {
@@ -87,10 +113,34 @@ namespace TrainingProject.Presentation
             {
                 textBox.Text = string.Empty;
             }
+            btnSave.Text = "Save";
         }
         async void PopulateDataGridView()
         {
             dataGridView1.DataSource = (await contactFormService.GetAllAsync()).ToList();
+        }
+
+        private async void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                modelId = Guid.Parse(dataGridView1.CurrentRow.Cells["Id"].Value.ToString());
+                var model = await contactFormService.GetByIdAsync(modelId);
+
+                textFirstname.Text = model.FirstName;
+                textLastname.Text = model.LastName;
+                textEmail.Text = model.Email;
+                textPhoneNumber.Text = model.PhoneNumber;
+                textCompany.Text = model.CompanyId.ToString();
+                textNote.Text = model.Notes;
+                textPosition.Text = model.Position;
+
+                btnSave.Text = "Update";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"error: {ex.Message}");
+            }
         }
     }
 }

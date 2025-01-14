@@ -53,10 +53,10 @@
             Firstname = new DataGridViewTextBoxColumn();
             Lastname = new DataGridViewTextBoxColumn();
             PhoneNumber = new DataGridViewTextBoxColumn();
+            Note = new DataGridViewTextBoxColumn();
             Email = new DataGridViewTextBoxColumn();
             Position = new DataGridViewTextBoxColumn();
             CompanyId = new DataGridViewTextBoxColumn();
-            Note = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -109,14 +109,17 @@
             // dataGridView1
             // 
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.BackgroundColor = Color.Bisque;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, Firstname, Lastname, PhoneNumber, Email, Position, CompanyId, Note });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, Firstname, Lastname, PhoneNumber, Note, Email, Position, CompanyId });
+            dataGridView1.GridColor = SystemColors.InactiveCaptionText;
             dataGridView1.Location = new Point(279, 63);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(756, 375);
             dataGridView1.TabIndex = 10;
+            dataGridView1.DoubleClick += dataGridView1_DoubleClick;
             // 
             // label1
             // 
@@ -284,6 +287,15 @@
             PhoneNumber.ReadOnly = true;
             PhoneNumber.Width = 125;
             // 
+            // Note
+            // 
+            Note.DataPropertyName = "Notes";
+            Note.HeaderText = "Note";
+            Note.MinimumWidth = 6;
+            Note.Name = "Note";
+            Note.ReadOnly = true;
+            Note.Width = 125;
+            // 
             // Email
             // 
             Email.DataPropertyName = "Email";
@@ -310,15 +322,6 @@
             CompanyId.Name = "CompanyId";
             CompanyId.ReadOnly = true;
             CompanyId.Width = 125;
-            // 
-            // Note
-            // 
-            Note.DataPropertyName = "Note";
-            Note.HeaderText = "Note";
-            Note.MinimumWidth = 6;
-            Note.Name = "Note";
-            Note.ReadOnly = true;
-            Note.Width = 125;
             // 
             // ContactForm
             // 
@@ -382,9 +385,9 @@
         private DataGridViewTextBoxColumn Firstname;
         private DataGridViewTextBoxColumn Lastname;
         private DataGridViewTextBoxColumn PhoneNumber;
+        private DataGridViewTextBoxColumn Note;
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn Position;
         private DataGridViewTextBoxColumn CompanyId;
-        private DataGridViewTextBoxColumn Note;
     }
 }

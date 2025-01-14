@@ -22,12 +22,7 @@ namespace TrainingProject.Api.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] Guid id)
-            => Ok(new Response
-            {
-                StatusCode = 200,
-                Message = "Success",
-                Data = await contactService.GetByIdAsync(id)
-            });
+            => Ok( await contactService.GetByIdAsync(id));
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] Guid id)
