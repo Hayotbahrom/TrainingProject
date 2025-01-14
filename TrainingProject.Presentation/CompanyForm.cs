@@ -19,14 +19,14 @@ namespace TrainingProject.Presentation
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             MainForm mainForm = new MainForm();
             mainForm.ShowDialog();
         }
