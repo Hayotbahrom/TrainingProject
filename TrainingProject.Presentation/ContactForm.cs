@@ -19,9 +19,16 @@ namespace TrainingProject.Presentation
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
+        }
+
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MainForm mainForm = new MainForm();
+            mainForm.ShowDialog();
         }
     }
 }

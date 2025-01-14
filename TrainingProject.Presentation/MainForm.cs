@@ -29,17 +29,21 @@ namespace TrainingProject.Presentation
 
         private void btnContact_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            ContactForm contactForm = new ContactForm();
+            contactForm.Show();
         }
 
         private void btnCompany_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            CompanyForm companyForm = new CompanyForm();
+            companyForm.ShowDialog();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
         }

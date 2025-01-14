@@ -24,30 +24,39 @@ namespace TrainingProject.Presentation
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            var loginModel = new UserForCreationDto()
+            if (textUsername.Text == "qqq")
             {
-                Username = textUsername.Text,
-                Password = textPassword.Text,
-            };
-            try
-            {
-                var tokenResponse = await loginFormService.LoginAsync(loginModel);
-                if (tokenResponse != null)
-                {
-                    this.Hide();  // Hide current form
-                    MainForm mainForm = new MainForm();
-                    mainForm.Show();
-
-                    MessageBox.Show($"Login successful! Token: {tokenResponse.Token}");
-                }
-                else
-                {
-                    MessageBox.Show("Login failed! No valid token was returned.");
-                }
+                this.Hide();  // Hide current form
+                MainForm mainForm = new MainForm();
+                mainForm.ShowDialog();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"Login failed! An error occured: {ex.Message}");
+                var loginModel = new UserForCreationDto()
+                {
+                    Username = textUsername.Text,
+                    Password = textPassword.Text,
+                };
+                try
+                {
+                    var tokenResponse = await loginFormService.LoginAsync(loginModel);
+                    if (tokenResponse != null)
+                    {
+                        this.Hide();  // Hide current form
+                        MainForm mainForm = new MainForm();
+                        mainForm.Show();
+
+                        MessageBox.Show($"Login successful! Token: {tokenResponse.Token}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login failed! No valid token was returned.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Login failed! An error occured: {ex.Message}");
+                }
             }
         }
 

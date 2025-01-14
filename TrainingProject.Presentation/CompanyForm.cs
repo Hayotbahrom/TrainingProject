@@ -23,5 +23,12 @@ namespace TrainingProject.Presentation
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MainForm mainForm = new MainForm();
+            mainForm.ShowDialog();
+        }
     }
 }
