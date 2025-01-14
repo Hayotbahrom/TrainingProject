@@ -50,6 +50,14 @@
             label8 = new Label();
             label9 = new Label();
             textCountry = new TextBox();
+            Id = new DataGridViewTextBoxColumn();
+            Name = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            Website = new DataGridViewTextBoxColumn();
+            PhoneNumber = new DataGridViewTextBoxColumn();
+            Street = new DataGridViewTextBoxColumn();
+            City = new DataGridViewTextBoxColumn();
+            Country = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -194,11 +202,13 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, Name, Email, Website, PhoneNumber, Street, City, Country });
             dataGridView1.Location = new Point(285, 73);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(742, 375);
             dataGridView1.TabIndex = 27;
+            dataGridView1.DoubleClick += dataGridView1_DoubleClick;
             // 
             // btnDelete
             // 
@@ -208,6 +218,7 @@
             btnDelete.TabIndex = 26;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnSave
             // 
@@ -217,6 +228,7 @@
             btnSave.TabIndex = 25;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // label8
             // 
@@ -243,6 +255,70 @@
             textCountry.Name = "textCountry";
             textCountry.Size = new Size(125, 27);
             textCountry.TabIndex = 44;
+            // 
+            // Id
+            // 
+            Id.DataPropertyName = "Id";
+            Id.HeaderText = "Id";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.Width = 125;
+            // 
+            // Name
+            // 
+            Name.DataPropertyName = "Name";
+            Name.HeaderText = "Name";
+            Name.MinimumWidth = 6;
+            Name.Name = "Name";
+            Name.Width = 125;
+            // 
+            // Email
+            // 
+            Email.DataPropertyName = "Email";
+            Email.HeaderText = "Email";
+            Email.MinimumWidth = 6;
+            Email.Name = "Email";
+            Email.Width = 125;
+            // 
+            // Website
+            // 
+            Website.DataPropertyName = "Website";
+            Website.HeaderText = "Website";
+            Website.MinimumWidth = 6;
+            Website.Name = "Website";
+            Website.Width = 125;
+            // 
+            // PhoneNumber
+            // 
+            PhoneNumber.DataPropertyName = "PhoneNumber";
+            PhoneNumber.HeaderText = "PhoneNumber";
+            PhoneNumber.MinimumWidth = 6;
+            PhoneNumber.Name = "PhoneNumber";
+            PhoneNumber.Width = 125;
+            // 
+            // Street
+            // 
+            Street.DataPropertyName = "Street";
+            Street.HeaderText = "Street";
+            Street.MinimumWidth = 6;
+            Street.Name = "Street";
+            Street.Width = 125;
+            // 
+            // City
+            // 
+            City.DataPropertyName = "City";
+            City.HeaderText = "City";
+            City.MinimumWidth = 6;
+            City.Name = "City";
+            City.Width = 125;
+            // 
+            // Country
+            // 
+            Country.DataPropertyName = "Country";
+            Country.HeaderText = "Country";
+            Country.MinimumWidth = 6;
+            Country.Name = "Country";
+            Country.Width = 125;
             // 
             // CompanyForm
             // 
@@ -303,5 +379,13 @@
         private Label label8;
         private Label label9;
         private TextBox textCountry;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Name;
+        private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn Website;
+        private DataGridViewTextBoxColumn PhoneNumber;
+        private DataGridViewTextBoxColumn Street;
+        private DataGridViewTextBoxColumn City;
+        private DataGridViewTextBoxColumn Country;
     }
 }

@@ -18,21 +18,11 @@ namespace TrainingProject.Api.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
-            => Ok(new Response
-            {
-                StatusCode = 200,
-                Message = "Success",
-                Data = await companyService.GetAllAsync()
-            });
+            => Ok( await companyService.GetAllAsync());
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute(Name = "id")] Guid id)
-            => Ok(new Response
-            {
-                StatusCode = 200,
-                Message = "Success",
-                Data = await companyService.GetByIdAsync(id)
-            });
+            => Ok( await companyService.GetByIdAsync(id));
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] Guid id)

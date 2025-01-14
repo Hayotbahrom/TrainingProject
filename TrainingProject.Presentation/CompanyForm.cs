@@ -30,5 +30,20 @@ namespace TrainingProject.Presentation
             MainForm mainForm = new MainForm();
             mainForm.ShowDialog();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
