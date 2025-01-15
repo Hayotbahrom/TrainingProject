@@ -347,7 +347,6 @@
             Controls.Add(btnSave);
             Controls.Add(btnMain);
             Controls.Add(btnLogout);
-            Name = "CompanyForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CompanyForm";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

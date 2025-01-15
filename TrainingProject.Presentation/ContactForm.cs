@@ -64,7 +64,7 @@ namespace TrainingProject.Presentation
                 }
                 else
                 {
-                    ContactForCreationDto contact = new ContactForCreationDto()
+                    var contact = new ContactForCreationDto()
                     {
                         FirstName = textFirstname.Text,
                         LastName = textLastname.Text,
