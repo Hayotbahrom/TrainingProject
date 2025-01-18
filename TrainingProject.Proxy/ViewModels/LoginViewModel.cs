@@ -82,5 +82,27 @@ namespace TrainingProject.Proxy.ViewModels
                 return false;
             }
         }
+        public async Task<bool> RegisterAsync(string username, string password, string confirmedPassword)
+        {
+            if (password != confirmedPassword)
+            {
+                LoginMessage = "Password do not match";
+                return false;
+            }
+            else
+            {
+                bool isRegistered = await _formService.RegisterAsync(username, password);
+                if (isRegistered)
+                {
+                    LoginMessage = "Registered successfully";
+                    return true;
+                }
+                else
+                {
+                    LoginMessage = "Registration failed. Please try again.";
+                    return false;
+                }
+            }
+        }
     }
 }
