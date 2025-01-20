@@ -24,6 +24,7 @@ namespace TrainingProject.Presentation
 
             textUsername.DataBindings.Add("Text", loginViewModel, nameof(loginViewModel.Username), false, DataSourceUpdateMode.OnPropertyChanged);
             textPassword.DataBindings.Add("Text", loginViewModel, nameof(loginViewModel.Password), false, DataSourceUpdateMode.OnPropertyChanged);
+            lblLoginMessage.DataBindings.Add("Text", loginViewModel, nameof(loginViewModel.LoginMessage), false, DataSourceUpdateMode.OnPropertyChanged);
 
             button1.Click += async (s, e) => await LoginAsync();
         }
@@ -33,59 +34,61 @@ namespace TrainingProject.Presentation
             if (result)
             {
                 this.Hide();
+                MessageBox.Show(loginViewModel.LoginMessage);
                 MainForm mainForm = new MainForm();
                 mainForm.ShowDialog();
             }
         }
 
-       /* private async void button1_Click(object sender, EventArgs e)
-        {
-            var result = await loginViewModel.LoginAsync();
-            if (result)
-            {
-                this.Hide();
-                MainForm mainForm = new MainForm();
-                mainForm.ShowDialog();
-            }
-            /*if (textUsername.Text == "qqq")
-            {
-                this.Hide();  // Hide current form
-                MainForm mainForm = new MainForm();
-                mainForm.ShowDialog();
-            }
-            else
-            {
-                var loginModel = new UserForCreationDto()
-                {
-                    Username = textUsername.Text,
-                    Password = textPassword.Text,
-                };
-                try
-                {
-                    var tokenResponse = await loginFormService.LoginAsync(loginModel);
-                    if (tokenResponse != null)
-                    {
-                        this.Hide();  // Hide current form
-                        MainForm mainForm = new MainForm();
-                        mainForm.Show();
+        /* private async void button1_Click(object sender, EventArgs e)
+         {
+             var result = await loginViewModel.LoginAsync();
+             if (result)
+             {
+                 this.Hide();
+                 MainForm mainForm = new MainForm();
+                 mainForm.ShowDialog();
+             }
+             /*if (textUsername.Text == "qqq")
+             {
+                 this.Hide();  // Hide current form
+                 MainForm mainForm = new MainForm();
+                 mainForm.ShowDialog();
+             }
+             else
+             {
+                 var loginModel = new UserForCreationDto()
+                 {
+                     Username = textUsername.Text,
+                     Password = textPassword.Text,
+                 };
+                 try
+                 {
+                     var tokenResponse = await loginFormService.LoginAsync(loginModel);
+                     if (tokenResponse != null)
+                     {
+                         this.Hide();  // Hide current form
+                         MainForm mainForm = new MainForm();
+                         mainForm.Show();
 
-                        MessageBox.Show($"Login successful! Token: {tokenResponse.Token}");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Login failed! No valid token was returned.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Login failed! An error occured: {ex.Message}");
-                }
-            }
-        }*/
-        
+                         MessageBox.Show($"Login successful! Token: {tokenResponse.Token}");
+                     }
+                     else
+                     {
+                         MessageBox.Show("Login failed! No valid token was returned.");
+                     }
+                 }
+                 catch (Exception ex)
+                 {
+                     MessageBox.Show($"Login failed! An error occured: {ex.Message}");
+                 }
+             }
+         }*/
+
         private async Task RegisterAsync()
         {
-            await loginViewModel.RegisterAsync(textRegUsername.Text, textRegPassword.Text, textConfirmPassword.Text);
+            var result = await loginViewModel.RegisterAsync(textRegUsername.Text, textRegPassword.Text, textConfirmPassword.Text);
+            MessageBox.Show(loginViewModel.LoginMessage);
         }
         private async void btnRegister_Click(object sender, EventArgs e)
         {
@@ -102,5 +105,6 @@ namespace TrainingProject.Presentation
                 MessageBox.Show("Password and Confirmed password are not match");
             }
         }
+
     }
 }

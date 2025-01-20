@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabLogin = new TabPage();
+            lblLoginMessage = new Label();
             textPassword = new TextBox();
             label2 = new Label();
             button1 = new Button();
@@ -62,6 +63,7 @@
             // tabLogin
             // 
             tabLogin.BackColor = Color.LightGray;
+            tabLogin.Controls.Add(lblLoginMessage);
             tabLogin.Controls.Add(textPassword);
             tabLogin.Controls.Add(label2);
             tabLogin.Controls.Add(button1);
@@ -74,6 +76,15 @@
             tabLogin.Size = new Size(726, 379);
             tabLogin.TabIndex = 0;
             tabLogin.Text = "Login";
+            // 
+            // lblLoginMessage
+            // 
+            lblLoginMessage.AutoSize = true;
+            lblLoginMessage.Font = new Font("Stencil", 12F);
+            lblLoginMessage.Location = new Point(278, 29);
+            lblLoginMessage.Name = "lblLoginMessage";
+            lblLoginMessage.Size = new Size(0, 24);
+            lblLoginMessage.TabIndex = 5;
             // 
             // textPassword
             // 
@@ -101,7 +112,6 @@
             button1.TabIndex = 2;
             button1.Text = "Enter";
             button1.UseVisualStyleBackColor = false;
-            //button1.Click += button1_Click;
             // 
             // textUsername
             // 
@@ -235,5 +245,6 @@
         private Label label3;
         private TextBox textRegUsername;
         private Label label4;
+        private Label lblLoginMessage;
     }
 }
