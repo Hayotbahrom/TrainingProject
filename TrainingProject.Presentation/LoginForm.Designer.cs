@@ -157,7 +157,6 @@
             btnRegister.TabIndex = 11;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = false;
-            btnRegister.Click += btnRegister_Click;
             // 
             // textConfirmPassword
             // 

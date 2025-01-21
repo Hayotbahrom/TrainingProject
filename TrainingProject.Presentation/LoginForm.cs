@@ -27,6 +27,7 @@ namespace TrainingProject.Presentation
             lblLoginMessage.DataBindings.Add("Text", loginViewModel, nameof(loginViewModel.LoginMessage), false, DataSourceUpdateMode.OnPropertyChanged);
 
             button1.Click += async (s, e) => await LoginAsync();
+            btnRegister.Click += async (s, e) => RegisterAsync();
         }
         private async Task LoginAsync()
         {
@@ -87,10 +88,10 @@ namespace TrainingProject.Presentation
 
         private async Task RegisterAsync()
         {
-            var result = await loginViewModel.RegisterAsync(textRegUsername.Text, textRegPassword.Text, textConfirmPassword.Text);
+            var result = await loginViewModel.RegisterAsync();
             MessageBox.Show(loginViewModel.LoginMessage);
         }
-        private async void btnRegister_Click(object sender, EventArgs e)
+        /*private async void btnRegister_Click(object sender, EventArgs e)
         {
             if (textRegPassword.Text == textConfirmPassword.Text)
             {
@@ -104,7 +105,7 @@ namespace TrainingProject.Presentation
             {
                 MessageBox.Show("Password and Confirmed password are not match");
             }
-        }
+        }*/
 
     }
 }

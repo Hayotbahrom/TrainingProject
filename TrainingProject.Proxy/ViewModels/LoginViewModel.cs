@@ -15,8 +15,8 @@ namespace TrainingProject.Proxy.ViewModels
         private string _username;
         private string _password;
         private string _loginMessage;
+        private string _confirmedPassword;                      
         private readonly LoginFormService _formService;
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -55,6 +55,15 @@ namespace TrainingProject.Proxy.ViewModels
                 OnPropertyChanged(nameof(LoginMessage));
             }
         }
+        public string ConfirmedPassword
+        {
+            get => _confirmedPassword;
+            set
+            {
+                _confirmedPassword = value;
+                OnPropertyChanged(nameof(ConfirmedPassword));
+            }
+        }
         public async Task<bool> LoginAsync()
         {
             var loginModel = new UserForCreationDto
@@ -82,19 +91,19 @@ namespace TrainingProject.Proxy.ViewModels
                 return false;
             }
         }
-        public async Task<bool> RegisterAsync(string username, string password, string confirmedPassword)
+        public async Task<bool> RegisterAsync()
         {
-            if (password != confirmedPassword)
+            if (Password != ConfirmedPassword)
             {
                 LoginMessage = "Password do not match";
                 return false;
             }
             else
             {
-                bool isRegistered = await _formService.RegisterAsync(username, password);
+                bool isRegistered = await _formService.RegisterAsync(Username, Password);
                 if (isRegistered)
                 {
-                    LoginMessage = "Registered successfully";
+                    LoginMessage = $"{Username} Registered successfully";
                     return true;
                 }
                 else
