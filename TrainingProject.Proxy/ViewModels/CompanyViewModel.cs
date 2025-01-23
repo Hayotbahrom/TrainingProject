@@ -116,7 +116,7 @@ namespace TrainingProject.Proxy.ViewModels
         public BindingList<CompanyForResultDto> Companies
         {
             get => _companies;
-            set { _companies = value; OnPropertyChanged(nameof(CompanyForResultDto)); }
+            set { _companies = value; OnPropertyChanged(nameof(Companies)); }
         }
         private string _statusMessage;
         public string StatusMessage

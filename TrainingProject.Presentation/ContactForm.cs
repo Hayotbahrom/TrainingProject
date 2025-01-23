@@ -13,6 +13,8 @@ using TrainingProject.Shared.DTOs.Contacts;
 
 namespace TrainingProject.Presentation
 {
+
+     
     public partial class ContactForm : Form
     {
         private Guid modelId;

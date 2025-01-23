@@ -42,14 +42,9 @@
             label3 = new Label();
             textWebsite = new TextBox();
             label2 = new Label();
-            textFirstname = new TextBox();
+            textName = new TextBox();
             label1 = new Label();
             dataGridView1 = new DataGridView();
-            btnDelete = new Button();
-            btnSave = new Button();
-            label8 = new Label();
-            label9 = new Label();
-            textCountry = new TextBox();
             Id = new DataGridViewTextBoxColumn();
             Name = new DataGridViewTextBoxColumn();
             Email = new DataGridViewTextBoxColumn();
@@ -58,6 +53,11 @@
             Street = new DataGridViewTextBoxColumn();
             City = new DataGridViewTextBoxColumn();
             Country = new DataGridViewTextBoxColumn();
+            btnDelete = new Button();
+            btnSave = new Button();
+            label8 = new Label();
+            label9 = new Label();
+            textCountry = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -183,12 +183,12 @@
             label2.TabIndex = 30;
             label2.Text = "Website";
             // 
-            // textFirstname
+            // textName
             // 
-            textFirstname.Location = new Point(120, 73);
-            textFirstname.Name = "textFirstname";
-            textFirstname.Size = new Size(125, 27);
-            textFirstname.TabIndex = 29;
+            textName.Location = new Point(120, 73);
+            textName.Name = "textName";
+            textName.Size = new Size(125, 27);
+            textName.TabIndex = 29;
             // 
             // label1
             // 
@@ -209,52 +209,6 @@
             dataGridView1.Size = new Size(742, 375);
             dataGridView1.TabIndex = 27;
             dataGridView1.DoubleClick += dataGridView1_DoubleClick;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(151, 344);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(94, 29);
-            btnDelete.TabIndex = 26;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
-            // 
-            // btnSave
-            // 
-            btnSave.Location = new Point(51, 344);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(94, 29);
-            btnSave.TabIndex = 25;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(285, 16);
-            label8.Name = "label8";
-            label8.Size = new Size(151, 41);
-            label8.TabIndex = 42;
-            label8.Text = "Company";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(42, 302);
-            label9.Name = "label9";
-            label9.Size = new Size(60, 20);
-            label9.TabIndex = 43;
-            label9.Text = "Country";
-            // 
-            // textCountry
-            // 
-            textCountry.Location = new Point(120, 304);
-            textCountry.Name = "textCountry";
-            textCountry.Size = new Size(125, 27);
-            textCountry.TabIndex = 44;
             // 
             // Id
             // 
@@ -320,6 +274,52 @@
             Country.Name = "Country";
             Country.Width = 125;
             // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(151, 344);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 29);
+            btnDelete.TabIndex = 26;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(51, 344);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(94, 29);
+            btnSave.TabIndex = 25;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(285, 16);
+            label8.Name = "label8";
+            label8.Size = new Size(151, 41);
+            label8.TabIndex = 42;
+            label8.Text = "Company";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(42, 302);
+            label9.Name = "label9";
+            label9.Size = new Size(60, 20);
+            label9.TabIndex = 43;
+            label9.Text = "Country";
+            // 
+            // textCountry
+            // 
+            textCountry.Location = new Point(120, 304);
+            textCountry.Name = "textCountry";
+            textCountry.Size = new Size(125, 27);
+            textCountry.TabIndex = 44;
+            // 
             // CompanyForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -340,13 +340,14 @@
             Controls.Add(label3);
             Controls.Add(textWebsite);
             Controls.Add(label2);
-            Controls.Add(textFirstname);
+            Controls.Add(textName);
             Controls.Add(label1);
             Controls.Add(dataGridView1);
             Controls.Add(btnDelete);
             Controls.Add(btnSave);
             Controls.Add(btnMain);
             Controls.Add(btnLogout);
+            Name = "CompanyForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CompanyForm";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -370,7 +371,7 @@
         private Label label3;
         private TextBox textWebsite;
         private Label label2;
-        private TextBox textFirstname;
+        private TextBox textName;
         private Label label1;
         private DataGridView dataGridView1;
         private Button btnDelete;
