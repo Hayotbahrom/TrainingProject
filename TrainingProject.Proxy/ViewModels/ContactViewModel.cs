@@ -68,6 +68,12 @@ namespace TrainingProject.Proxy.ViewModels
             get => _statusMessage;
             set { _statusMessage = value; OnPropertyChanged(nameof(StatusMessage)); }
         }
+        private BindingList<ContactForResultDto> _contacts;
+        public BindingList<ContactForResultDto> Contacts
+        {
+            get => _contacts;
+            set { _contacts = value; OnPropertyChanged(nameof(Contacts));}
+        }
         public async Task<bool> AddContactAsync()
         {
             var contact = new ContactForCreationDto
@@ -118,6 +124,7 @@ namespace TrainingProject.Proxy.ViewModels
         {
             try
             {
+                StatusMessage = "Contact is deleted";
                 return await _contactFormService.DeleteAsync(id);
             }
             catch (Exception ex)
@@ -126,16 +133,21 @@ namespace TrainingProject.Proxy.ViewModels
                 return false;
             }
         }
-        public async Task<IEnumerable<ContactForResultDto>> LoadAllContactsAsync()
+        public async Task<ContactForResultDto> GetContactByIdAsync(Guid id)
+        {
+            return await _contactFormService.GetByIdAsync(id);
+        }
+        public async Task LoadAllContactsAsync()
         {
             try
             {
-                return await _contactFormService.GetAllAsync();
+                var contacts = await _contactFormService.GetAllAsync();
+                Contacts = new BindingList<ContactForResultDto>(contacts.ToList());
             }
             catch (Exception ex)
             {
                 StatusMessage = $"Error: {ex.Message}";
-                return Enumerable.Empty<ContactForResultDto>();
+                Contacts = new BindingList<ContactForResultDto>();
             }
         }
     }

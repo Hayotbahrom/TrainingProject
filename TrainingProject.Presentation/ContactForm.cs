@@ -8,18 +8,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrainingProject.Proxy.Services;
+using TrainingProject.Proxy.ViewModels;
 using TrainingProject.Shared.DTOs.Contacts;
 
 namespace TrainingProject.Presentation
 {
     public partial class ContactForm : Form
     {
-        private ContactFormService contactFormService;
-        Guid modelId;
+        private Guid modelId;
+        private ContactViewModel _contactViewModel;
+        private BindingSource _bindingSource;
         public ContactForm()
         {
             InitializeComponent();
-            contactFormService = new ContactFormService(new HttpClient());
+            _contactViewModel = new ContactViewModel();
+            _bindingSource = new BindingSource();
+
+            BindControls();
+            BindDataGridView();
+            PopulateDataGridView();
+        }
+        private void BindControls()
+        {
+            textFirstname.DataBindings.Add("Text", _contactViewModel, nameof(_contactViewModel.FirstName), false,DataSourceUpdateMode.OnPropertyChanged);
+            textLastname.DataBindings.Add("Text", _contactViewModel, nameof(_contactViewModel.LastName), false,DataSourceUpdateMode.OnPropertyChanged);
+            textEmail.DataBindings.Add("Text", _contactViewModel, nameof(_contactViewModel.Email), false,DataSourceUpdateMode.OnPropertyChanged);
+            textPosition.DataBindings.Add("Text", _contactViewModel, nameof(_contactViewModel.Position), false,DataSourceUpdateMode.OnPropertyChanged);
+            textPhoneNumber.DataBindings.Add("Text", _contactViewModel, nameof(_contactViewModel.PhoneNumber), false,DataSourceUpdateMode.OnPropertyChanged);
+            textNote.DataBindings.Add("Text", _contactViewModel, nameof(_contactViewModel.Notes), false,DataSourceUpdateMode.OnPropertyChanged);
+            textCompany.DataBindings.Add("Text", _contactViewModel, nameof(_contactViewModel.CompanyId), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -38,86 +55,36 @@ namespace TrainingProject.Presentation
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            if (btnSave.Text == "Update")
             {
-                if (btnSave.Text == "Update")
-                {
-                    ContactForUpdateDto contact = new ContactForUpdateDto()
-                    {
-                        FirstName = textFirstname.Text,
-                        LastName = textLastname.Text,
-                        Email = textEmail.Text,
-                        PhoneNumber = textPhoneNumber.Text,
-                        Position = textPosition.Text,
-                        CompanyId = Guid.Parse(textCompany.Text),
-                        Notes = textNote.Text
-                    };
-                    bool result = await contactFormService.UpdateAsync(modelId, contact);
-                    if (result)
-                    {
-                        MessageBox.Show("Contact successfuly updated!");
-                        Clear();
-                        PopulateDataGridView();
-                    }
-                    else
-                        MessageBox.Show("update Failed");
-                }
-                else
-                {
-                    var contact = new ContactForCreationDto()
-                    {
-                        FirstName = textFirstname.Text,
-                        LastName = textLastname.Text,
-                        Email = textEmail.Text,
-                        PhoneNumber = textPhoneNumber.Text,
-                        Position = textPosition.Text,
-                        CompanyId = Guid.Parse(textCompany.Text),
-                        Notes = textNote.Text
-                    };
-                    bool result = await contactFormService.AddAsync(contact);
-                    if (result)
-                    {
-                        MessageBox.Show("Contact successfuly inserted!");
-                        Clear();
-                        PopulateDataGridView();
-                    }
-                    else
-                        MessageBox.Show("Failed");
-                }
+                var result = await _contactViewModel.UpdateContactAsync(modelId);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"error: {ex.Message}");
+                var result = await _contactViewModel.AddContactAsync();
             }
+            MessageBox.Show(_contactViewModel.StatusMessage);
+            Clear();
+            PopulateDataGridView();
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var result = await contactFormService.DeleteAsync(modelId);
-                if (result)
-                {
-                    MessageBox.Show("Successfully deleted..");
-                    Clear();
-                    PopulateDataGridView();
-                }
-                else MessageBox.Show("Failed, maybe you didnt select any contact");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"error: {ex.Message}");
-            }
+            await _contactViewModel.DeleteContactAsync(modelId);
+            MessageBox.Show(_contactViewModel?.StatusMessage);
+            Clear();
+            PopulateDataGridView();
         }
 
         private void Contact(object sender, EventArgs e)
         {
-
+           
         }
 
         private void ContactForm_Load(object sender, EventArgs e)
         {
             Clear();
+            BindDataGridView();
             PopulateDataGridView();
         }
         private void Clear()
@@ -131,23 +98,32 @@ namespace TrainingProject.Presentation
         }
         async void PopulateDataGridView()
         {
-            dataGridView1.DataSource = (await contactFormService.GetAllAsync()).ToList();
+            //var contacts = _contactViewModel.Contacts;
+            await _contactViewModel.LoadAllContactsAsync();
+            _bindingSource.ResetBindings(false);
+            BindDataGridView();
         }
-
-        private async void dataGridView1_DoubleClick(object sender, EventArgs e)
+        private void BindDataGridView()
         {
+            _bindingSource.DataSource = _contactViewModel.Contacts;
+            dataGridView1.DataSource = _bindingSource;
+        }
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null) return;
+
             try
             {
                 modelId = Guid.Parse(dataGridView1.CurrentRow.Cells["Id"].Value.ToString());
-                var model = await contactFormService.GetByIdAsync(modelId);
+                var contact = _contactViewModel.Contacts.First(c => c.Id == modelId);
 
-                textFirstname.Text = model.FirstName;
-                textLastname.Text = model.LastName;
-                textEmail.Text = model.Email;
-                textPhoneNumber.Text = model.PhoneNumber;
-                textCompany.Text = model.CompanyId.ToString();
-                textNote.Text = model.Notes;
-                textPosition.Text = model.Position;
+                _contactViewModel.FirstName = contact.FirstName;
+                _contactViewModel.LastName = contact.LastName;
+                _contactViewModel.Email = contact.Email;
+                _contactViewModel.PhoneNumber = contact.PhoneNumber;
+                _contactViewModel.CompanyId = contact.CompanyId;
+                _contactViewModel.Notes = contact.Notes;
+                _contactViewModel.Position = contact.Position;
 
                 btnSave.Text = "Update";
             }
@@ -156,5 +132,7 @@ namespace TrainingProject.Presentation
                 MessageBox.Show($"error: {ex.Message}");
             }
         }
+
+
     }
 }
