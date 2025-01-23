@@ -23,6 +23,7 @@ namespace TrainingProject.Proxy.ViewModels
         {
             companyFormService = new CompanyFormService(new HttpClient());
         }
+
         public string Name 
         {
             get => _companyName;

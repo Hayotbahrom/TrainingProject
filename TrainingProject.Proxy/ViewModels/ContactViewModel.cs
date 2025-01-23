@@ -21,11 +21,11 @@ namespace TrainingProject.Proxy.ViewModels
         {
             _contactFormService = new ContactFormService(new HttpClient());
         }
-        private Guid _contactId;
+        private Guid _companyId;
         public Guid CompanyId 
         { 
-            get => _contactId; 
-            set { _contactId = value; OnPropertyChanged(nameof(CompanyId)); } 
+            get => _companyId; 
+            set { _companyId = value; OnPropertyChanged(nameof(CompanyId)); } 
         }
         private string _firstName;
         public string FirstName 
