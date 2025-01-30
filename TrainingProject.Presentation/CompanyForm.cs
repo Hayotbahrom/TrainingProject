@@ -116,9 +116,9 @@ namespace TrainingProject.Presentation
 
                     btnSave.Text = "Update";
                 }
-                catch(Exception ex)
+                catch(Exception ex)     
                 {
-                    MessageBox.Show($"Error: {ex.Message}");
+                    MessageBox.Show($"Error: {ex.Message}");        
                 }
             }
         }
